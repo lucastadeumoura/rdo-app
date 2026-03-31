@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RDO - Daily Work Report</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 20px; background: #f4f4f9; color: #333; }
+        .card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        h2 { border-bottom: 2px solid #007AFF; padding-bottom: 5px; color: #007AFF; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        label { display: block; font-size: 0.8rem; font-weight: bold; margin-top: 10px; }
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .photo-section { border: 2px dashed #007AFF; padding: 20px; text-align: center; cursor: pointer; }
+        button { background: #007AFF; color: white; border: none; padding: 15px; border-radius: 8px; width: 100%; font-size: 1rem; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <h1>RDO n° <input type="text" placeholder="72" style="width: 60px;"></h1>
+
+    <div class="card">
+        <h2>General Info</h2>
+        <div class="grid">
+            <div>
+                <label>Date</label>
+                <input type="date">
+            </div>
+            <div>
+                <label>Day of Week</label>
+                <select>
+                    <option>Monday</option><option>Tuesday</option><option>Wednesday</option>
+                    <option>Thursday</option><option>Friday</option><option>Saturday</option>
+                </select>
+            </div>
+        </div>
+        <label>Contractor</label>
+        <input type="text" placeholder="Neivaldo Maciel de Barros">
+        <label>Engineer Responsible</label>
+        <input type="text" placeholder="Lucas Tadeu de Moura">
+    </div>
+
+    <div class="card">
+        <h2>Conditions & Hours</h2>
+        <div class="grid">
+            <div>
+                <label>Entry Time</label>
+                <input type="time" value="07:00">
+            </div>
+            <div>
+                <label>Exit Time</label>
+                <input type="time" value="16:00">
+            </div>
+            <div>
+                <label>Weather (Morning)</label>
+                <select><option>Clear</option><option>Rainy</option></select>
+            </div>
+            <div>
+                <label>Condition</label>
+                <select><option>Practicable</option><option>Impracticable</option></select>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Labor (Staff Count)</h2>
+        <div class="grid">
+            <div><label>Bricklayers</label><input type="number" placeholder="2"></div>
+            <div><label>Plumbers</label><input type="number" placeholder="1"></div>
+            <div><label>Painters</label><input type="number" placeholder="1"></div>
+            <div><label>Helpers</label><input type="number" placeholder="3"></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Photo Gallery</h2>
+        <label>Photo Caption</label>
+        <input type="text" id="caption" placeholder="Ex: Wall preparation in the morning...">
+        <div class="photo-section" onclick="document.getElementById('fileInput').click()">
+            Tap to upload image
+            <input type="file" id="fileInput" accept="image/*" style="display:none">
+        </div>
+        <div id="preview" style="margin-top:10px;"></div>
+    </div>
+
+    <button onclick="alert('Report Saved!')">Generate Report</button>
+
+    <script>
+        // Simple preview logic for the image
+        document.getElementById('fileInput').onchange = function (evt) {
+            const [file] = evt.target.files;
+            if (file) {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.style.width = "100%";
+                img.style.borderRadius = "8px";
+                document.getElementById('preview').appendChild(img);
+            }
+        }
+    </script>
+</body>
+</html>
