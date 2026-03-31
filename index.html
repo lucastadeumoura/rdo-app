@@ -2,81 +2,111 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RDO - Relatório Diário de Obra</title>
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RDO Digital</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-        body { font-family: sans-serif; padding: 15px; background: #f0f2f5; color: #1c1e21; }
-        #report-content { background: white; padding: 20px; border-radius: 8px; }
-        .card { border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; border-radius: 8px; }
-        h1 { color: #0056b3; font-size: 1.5rem; text-align: center; }
-        h2 { font-size: 1.1rem; border-bottom: 1px solid #eee; padding-bottom: 5px; color: #333; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        label { display: block; font-size: 0.75rem; font-weight: bold; margin-top: 8px; text-transform: uppercase; }
-        input, select, textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        .photo-area { border: 2px dashed #0056b3; padding: 15px; text-align: center; margin-top: 10px; border-radius: 8px; }
-        #btn-generate { background: #28a745; color: white; border: none; padding: 15px; border-radius: 8px; width: 100%; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        img { max-width: 100%; margin-top: 10px; border-radius: 4px; }
+        body { font-family: -apple-system, sans-serif; padding: 10px; background: #f8f9fa; }
+        #report-content { background: white; padding: 15px; border: 1px solid #ccc; }
+        .header { text-align: center; border-bottom: 2px solid #000; margin-bottom: 15px; }
+        .section { margin-bottom: 15px; border: 1px solid #eee; padding: 10px; border-radius: 5px; }
+        h2 { font-size: 1rem; color: #0056b3; margin-top: 0; text-transform: uppercase; border-bottom: 1px solid #eee; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        label { display: block; font-size: 0.7rem; font-weight: bold; margin-bottom: 2px; }
+        input, select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.9rem; box-sizing: border-box; }
+        
+        /* Botão de Imagem Corrigido */
+        .photo-input-container { margin-top: 10px; background: #e9ecef; padding: 15px; text-align: center; border-radius: 8px; border: 2px dashed #adb5bd; }
+        
+        /* Botão Gerar PDF */
+        .controls { margin-top: 20px; padding-bottom: 40px; }
+        #btn-generate { background: #28a745; color: white; border: none; padding: 18px; border-radius: 8px; width: 100%; font-size: 1.2rem; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+        
+        img { max-width: 100%; margin-top: 10px; display: block; border: 1px solid #ddd; }
+        .footer-note { font-size: 0.6rem; text-align: center; color: #999; margin-top: 10px; }
     </style>
 </head>
 <body>
 
     <div id="report-content">
-        <h1>Relatório Diário de Obra (RDO)</h1>
-
-        <div class="card">
-            <div class="grid">
-                <div>
-                    <label>Relatório N°</label>
-                    <input type="text" id="rdo-num" placeholder="Ex: 72">
-                </div>
-                <div>
-                    <label>Data</label>
-                    <input type="date" id="data-obra">
-                </div>
-            </div>
-            <label>Contratante</label>
-            <input type="text" id="contratante" placeholder="Nome do cliente">
-            <label>Responsável Técnico</label>
-            <input type="text" id="responsavel" placeholder="Nome do Engenheiro">
+        <div class="header">
+            <h1>Relatório Diário de Obra</h1>
+            <p>Pitangui - MG [cite: 17]</p>
         </div>
 
-        <div class="card">
-            <h2>Condições e Horários</h2>
+        <div class="section">
             <div class="grid">
-                <div>
-                    <label>Entrada</label>
-                    <input type="time" value="07:00">
-                </div>
-                <div>
-                    <label>Saída</label>
-                    <input type="time" value="16:00">
-                </div>
-                <div>
-                    <label>Clima (Manhã)</label>
-                    <select><option>Claro</option><option>Chuvoso</option><option>Nublado</option></select>
-                </div>
-                <div>
-                    <label>Condição</label>
-                    <select><option>Praticável</option><option>Impraticável</option></select>
-                </div>
+                <div><label>RDO N°</label><input type="number" id="rdo-num" value="72"></div>
+                <div><label>Data</label><input type="date" id="data-obra"></div>
             </div>
+            <label>Contratante</label><input type="text" placeholder="Ex: Neivaldo Maciel">
+            <label>Engenheiro Responsável</label><input type="text" placeholder="Seu nome">
         </div>
 
-        <div class="card">
-            <h2>Mão de Obra</h2>
+        <div class="section">
+            <h2>Mão de Obra [cite: 26]</h2>
             <div class="grid">
                 <div><label>Pedreiros</label><input type="number" value="0"></div>
                 <div><label>Serventes</label><input type="number" value="0"></div>
                 <div><label>Pintores</label><input type="number" value="0"></div>
-                <div><label>Eletricistas</label><input type="number" value="0"></div>
+                <div><label>Gesseiros</label><input type="number" value="0"></div>
             </div>
         </div>
 
-        <div class="card">
-            <h2>Galeria de Fotos</h2>
+        <div class="section">
+            <h2>Status das Atividades </h2>
+            <label>Instalações Elétricas</label>
+            <select><option>Em Andamento</option><option>Paralisada</option><option>Concluída</option></select>
+            <label>Pintura / Massa Acrílica</label>
+            <select><option>Em Andamento</option><option>Paralisada</option><option>Concluída</option></select>
+        </div>
+
+        <div class="section">
+            <h2>Galeria de Fotos [cite: 30]</h2>
             <label>Legenda da Foto</label>
-            <input type="text" id="caption" placeholder="Ex: Revestimento de parede...">
-            <div class="photo-area" onclick="document.getElementById('fileInput').click()">
-                Clique para selecionar a imagem
+            <input type="text" id="caption" placeholder="Descreva o que aparece na foto...">
+            
+            <div class="photo-input-container">
+                <input type="file" id="fileInput" accept="image/*" style="font-size: 0.8rem;">
+            </div>
+            <div id="preview"></div>
+        </div>
+        
+        <div class="footer-note">Gerado via RDO Digital - Lucas Tadeu de Moura [cite: 22]</div>
+    </div>
+
+    <div class="controls">
+        <button id="btn-generate">SALVAR E GERAR PDF</button>
+    </div>
+
+    <script>
+        // Preview da imagem
+        const fileInput = document.getElementById('fileInput');
+        fileInput.addEventListener('change', function(e) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const preview = document.getElementById('preview');
+                preview.innerHTML = '';
+                const img = new Image();
+                img.src = reader.result;
+                preview.appendChild(img);
+            }
+            reader.readAsDataURL(e.target.files[0]);
+        });
+
+        // Gerador de PDF
+        document.getElementById('btn-generate').onclick = function() {
+            const element = document.getElementById('report-content');
+            const num = document.getElementById('rdo-num').value;
+            const options = {
+                margin: 5,
+                filename: `RDO_${num}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(options).from(element).save();
+        };
+    </script>
+</body>
+</html>
